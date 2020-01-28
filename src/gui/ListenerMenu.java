@@ -22,9 +22,9 @@ public class ListenerMenu implements ActionListener {
 				
 			}
 		}else if("Info".equals(actionCommand)) {
-			JOptionPane.showMessageDialog(null,"Desarrollado por: \n     Santiago Arbelaez Cataño \n     Jose Francisco Miguel Diaz Diaz \n     Juan Esteban Lopez Lopez", "Acerca de nosotros", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Desarrollado por: \n     Juan Esteban Cendales \n     Juan Manuel Pajoy \n     Juan Pablo Ortega", "Acerca de nosotros", JOptionPane.INFORMATION_MESSAGE);
 		}else if("Ayuda".equals(actionCommand)) {
-			JOptionPane.showMessageDialog(null,"Envia un correo con tus dudas al correo: \n         → sarbelaezc@unal.edu.co \n         → jofdiazdi@unal.edu.co \n         → juaelopezlop@unal.edu.co \n \n y te responderemos lo antes posible.","Ver ayuda", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Envia un correo con tus dudas al correo: \n         → jcendaless@unal.edu.co \n         → jpajoyl@unal.edu.co \n         → jportegame@unal.edu.co \n \n.","Ver ayuda", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }
