@@ -1,8 +1,10 @@
 
-
-;Usuario Persona
-(deftemplate persona_natural
-	(slot nombre
+;--------------------------------------------------------------
+;-------------------Plantillas---------------------------------
+;--------------------------------------------------------------
+;Cafe arábico
+(deftemplate planta
+	(slot 
 		(type STRING)
 	)
 	(slot ciudad
@@ -12,27 +14,6 @@
 		(type STRING)	
 	)
 	(slot edad
-		(type INTEGER)
-	)
-)
-
-;Usuario Gobierno
-(deftemplate gobierno
-	(slot ciudad
-		(type STRING)
-	)
-)
-
-
-;Plantilla Sector
-(deftemplate sector
-	(slot nombre
-		(type STRING)
-	)
-	(slot ciudad
-		(type STRING)
-	)
-	(slot ica
 		(type INTEGER)
 	)
 )

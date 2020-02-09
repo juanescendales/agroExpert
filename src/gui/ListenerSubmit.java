@@ -47,6 +47,11 @@ public class ListenerSubmit implements ActionListener {
                 TA1.setText(TA1.getText() + "El indicador de textura es: " + texturaSuelo.getVariable("textura").defuzzify());
                 TA1.setText(TA1.getText() + "\n \n" + "El metodo usado para 'defuzzificar' la textura fue: " + texturaSuelo.getVariable("textura").getDefuzzifier());
                 TA1.setEditable(false);
+                
+                
+                
+                
+                
             }
         }
     }
