@@ -1,0 +1,92 @@
+FUNCTION_BLOCK texturaSuelo
+
+// Define input variables
+VAR_INPUT
+    porcentajeArenoso : REAL;
+    porcentajeLimoso : REAL;
+    porcentajeArcilloso : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+    textura : REAL;
+END_VAR
+
+// Fuzzify input variable 'porcentajeArenoso'
+FUZZIFY porcentajeArenoso
+    TERM poco := (0, 1) (25, 0); 
+    TERM pocoMediano := (20, 0) (35,1) (50,0);
+    TERM mediano := (40, 0) (50,1) (60, 0);
+    TERM altoMediano := (50, 0) (65, 1) (80, 0);
+    TERM alto := (75, 0) (100, 1);    
+END_FUZZIFY
+
+// Fuzzify input variable 'porcentajeLimoso'
+FUZZIFY porcentajeLimoso
+    TERM poco := (0, 1) (25, 0); 
+    TERM pocoMediano := (20, 0) (35,1) (50,0);
+    TERM mediano := (40, 0) (50,1) (60, 0);
+    TERM altoMediano := (50, 0) (65, 1) (80, 0);
+    TERM alto := (75, 0) (100, 1);   
+END_FUZZIFY
+
+// Fuzzify input variable 'porcentajeArcilloso'
+FUZZIFY porcentajeArcilloso
+    TERM poco := (0, 1) (25, 0); 
+    TERM pocoMediano := (20, 0) (35,1) (50,0);
+    TERM mediano := (40, 0) (50,1) (60, 0);
+    TERM altoMediano := (50, 0) (65, 1) (80, 0);
+    TERM alto := (75, 0) (100, 1);  
+END_FUZZIFY
+
+// Defzzzify output variable 'textura'
+DEFUZZIFY textura
+    TERM ligera := (0,1) (20,0);
+    TERM moderadamenteLigera := (20,0) (30,1) (40,0);
+    TERM media := (40,0) (50,1) (60,0);
+    TERM moderadamentePesada := (60,0) (70,1) (80,0);
+    TERM pesada := (80,0) (100,1);
+
+    // Use 'Center Of Gravity' defuzzification method
+    METHOD : COG;
+    // Default value is 0 (if no rule activates defuzzifier)
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK No1
+    // Use 'min' for 'and' (also implicit use 'max'
+    // for 'or' to fulfill DeMorgan's Law)
+    AND : MIN;
+    ACT : MIN;  // Use 'min' activation method
+    ACCU : MAX; // Use 'max' accumulation method
+
+
+    RULE 1 : IF porcentajeArenoso IS alto AND porcentajeLimoso IS poco AND porcentajeArcilloso IS poco 
+                THEN textura IS pesada;
+    RULE 2 : IF porcentajeArenoso IS altoMediano AND (porcentajeLimoso IS poco OR porcentajeLimoso IS pocoMediano) AND porcentajeArcilloso IS poco 
+                THEN textura IS pesada;               
+    RULE 3 : IF (porcentajeArenoso IS altoMediano OR porcentajeArenoso IS mediano) AND (porcentajeLimoso IS poco OR porcentajeLimoso IS pocoMediano OR porcentajeLimoso IS mediano )AND porcentajeArcilloso IS poco
+                THEN textura IS moderadamentePesada;
+    RULE 4 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS pocoMediano) AND (porcentajeLimoso IS mediano OR porcentajeLimoso IS pocoMediano) AND porcentajeArcilloso IS poco 
+                THEN textura IS media;
+    RULE 5 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS pocoMediano) AND porcentajeLimoso IS altoMediano AND porcentajeArcilloso IS poco 
+                THEN textura IS media;
+    RULE 6 : IF porcentajeArenoso IS poco AND porcentajeLimoso IS alto AND porcentajeArcilloso IS poco 
+                THEN textura IS media;
+    RULE 7 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS pocoMediano) AND (porcentajeLimoso IS mediano OR porcentajeLimoso IS pocoMediano) AND porcentajeArcilloso IS pocoMediano 
+                THEN textura IS moderadamenteLigera;
+    RULE 8 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS altoMediano) AND porcentajeLimoso IS poco AND porcentajeArcilloso IS pocoMediano 
+                THEN textura IS moderadamenteLigera;
+    RULE 9 : IF porcentajeArenoso IS poco AND (porcentajeLimoso IS mediano OR porcentajeLimoso IS altoMediano) AND porcentajeArcilloso IS pocoMediano 
+                THEN textura IS moderadamenteLigera;
+    RULE 10 : IF porcentajeArenoso IS mediano AND porcentajeLimoso IS poco AND porcentajeArcilloso IS mediano 
+                THEN textura IS ligera;
+    RULE 11 :IF porcentajeArenoso IS poco AND porcentajeLimoso IS mediano AND porcentajeArcilloso IS mediano 
+                THEN textura IS ligera;
+    RULE 12 :IF (porcentajeArenoso IS poco OR porcentajeArenoso IS pocoMediano) AND (porcentajeLimoso IS poco OR porcentajeLimoso IS pocoMediano) AND (porcentajeArcilloso IS mediano OR porcentajeArcilloso IS altoMediano OR porcentajeArcilloso IS alto)
+                THEN textura IS ligera;
+
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
