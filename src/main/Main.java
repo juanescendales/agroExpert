@@ -1,8 +1,8 @@
 package main;
-import gui.InterfazDelUsuario;
+import gui.InterfazDelSuelo;
 public class Main {
 
     public static void main(String[] args) {
-        new InterfazDelUsuario();
+        new InterfazDelSuelo();
     }
 }

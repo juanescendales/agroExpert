@@ -10,18 +10,26 @@ import javax.swing.JTextField;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 
-public class ListenerSubmit implements ActionListener {
+public class ListenerSubmitRecomendacion implements ActionListener {
 
     JTextField T1;
     JTextField T2;
     JTextField T3;
-    JTextArea TA1;
 
-    public ListenerSubmit(JTextField t1, JTextField t2, JTextField t3, JTextArea ta1) {
-        T1 = t1;
-        T2 = t2;
-        T3 = t3;
-        TA1 = ta1;
+
+    public ListenerSubmitRecomendacion(JTextField TAltitud,
+    		JTextField TTemperatura,
+    		JTextField TPrecipitacion,
+    		JTextField TProfundidad,
+    		JTextField THumedadRelativa,
+    		JTextField THumedadAbsoluta,
+    		JTextField TVaporDeAgua,
+    		JTextField TTexturaDelSuelo,
+    		JTextField TPh,
+    		JTextField TFotoperiodo) {
+        T1 = TTemperatura;
+        T2 = TPrecipitacion;
+        T3 = TProfundidad;
     }
 
     @Override
