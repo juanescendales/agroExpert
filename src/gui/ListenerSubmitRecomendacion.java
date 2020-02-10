@@ -22,6 +22,7 @@ public class ListenerSubmitRecomendacion implements ActionListener {
 	 JTextField TTextura;
 	 JTextField TPh;
 	 JTextField TFotoperiodo;
+	 JTextField TProfundidad;
 	 JTextArea textArea;
 	 
 	 Rete motor;
@@ -33,6 +34,7 @@ public class ListenerSubmitRecomendacion implements ActionListener {
     		JTextField TTextura,
     		JTextField TPh,
     		JTextField TFotoperiodo,
+    		JTextField TProfundidad,
     		JTextArea textArea,
     		Rete motor) throws JessException {
     	
@@ -41,6 +43,8 @@ public class ListenerSubmitRecomendacion implements ActionListener {
         this.TTextura = TTextura;
         this.TPh = TPh;
         this.TFotoperiodo = TFotoperiodo;
+        this.TProfundidad = TProfundidad;
+        
         this.textArea = textArea;
         
         this.motor = motor;
@@ -54,9 +58,10 @@ public class ListenerSubmitRecomendacion implements ActionListener {
             	try {
             		motor.batch("src/clp/expertSystemProject.CLP");
             		motor.reset();
-					//motor.assertString("(planta (nombre 'cafe') (altitud "+ TAltitud.getText()+") (temperatura "+TTemperatura.getText()
-					//+") (precipitacion " + TPrecipitacion.getText() + ") (profundidadDelSuelo " + TProfundidad.getText()+") (humedadRelativa "
-					//+ THumedadRelativa.getText() + ") (texturaDelSuelo "+TTextura.getText()+") (phDelSuelo "+ TPh.getText()+") (fotoperiodo '"+ TFotoperiodo.getText()+"'))");
+					motor.assertString("(planta (nombre '"+(String)cbPlanta.getSelectedItem()+"')"
+					+"(profundidadDelSuelo " + TProfundidad.getText()+")"
+					+"(texturaDelSuelo '"+TTextura.getText()+"') (phDelSuelo "+ TPh.getText()+") (fotoperiodo '"+ TFotoperiodo.getText()+"'))");
+					motor.assertString("(zonaSeleccionada (nombre '"+(String)cbZona.getSelectedItem()+"'))");
 					motor.run();
 					motor.executeCommand("(facts)");
 					String text = "";
@@ -67,7 +72,6 @@ public class ListenerSubmitRecomendacion implements ActionListener {
 					while(it.hasNext()) {
 						faux = (Fact) it.next();
 						if(faux.getName().equals("MAIN::respuesta")) {
-							System.out.println("funciona");
 							text+=faux.getSlotValue("print");
 						}
 					}

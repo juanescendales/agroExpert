@@ -7,21 +7,8 @@
 	(slot nombre
 		(type STRING)
 	)
-	(slot altitud
-		(type INTEGER)
-	)
-	(slot temperatura
-		(type INTEGER)
-	)
-	(slot precipitacion
-		(type INTEGER)	
-	)
 	(slot profundidadDelSuelo
 		(type INTEGER)
-	)
-	(slot humedadRelativa
-		(type INTEGER)
-		;(range 0 100)
 	)
 	(slot texturaDelSuelo
 		(type STRING)
@@ -54,6 +41,11 @@
 		;(range 0 100)
 	)
 )
+(deftemplate zonaSeleccionada
+	(slot nombre
+		(type STRING)
+	)
+)
 (deftemplate respuesta
 	(slot print
 		(type STRING)
@@ -63,7 +55,7 @@
 ;----------------------Hechos Iniciales-------------------------
 ;---------------------------------------------------------------
 (deffacts hechos_iniciales
-	(menu)
+	(cafePrecipitacion)
 	(zona
 		(nombre 'Palestina')
 		(altitud 1603)
@@ -143,6 +135,14 @@
 		(humedadRelativa 77)
 
 	)
+	(zona
+		(nombre 'cafe')
+		(altitud 1500)
+		(temperatura 20)
+		(precipitacion 1600)
+		(humedadRelativa 77)
+
+	)
 
 )
 
@@ -154,11 +154,13 @@
 	?hecho <- (cafePrecipitacion)
 	(planta
 		(nombre 'cafe')
-		(precipitacion ?precipitacion &:(> ?precipitacion 1500)|:(< ?precipitacion 2000))
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
 	)
 	(zona
 		(nombre ?nombre)
-		(precipitacion ?precipitacion &:(> ?precipitacion 1500)|:(< ?precipitacion 2000))
+		(precipitacion ?precipitacion &:(> ?precipitacion 1500)&:(< ?precipitacion 2000))
 	)
 	=>
 	(assert (cafeTemperatura))
@@ -167,11 +169,13 @@
 	(cafeTemperatura)
 	(planta
 		(nombre 'cafe')
-		(temperatura ?temperatura &:(> ?temperatura 16)|:(< ?temperatura 22))
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
 	)
 	(zona
 		(nombre ?nombre)
-		(temperatura ?temperatura &:(> ?temperatura 16)|:(< ?temperatura 22))
+		(temperatura ?temperatura &:(> ?temperatura 16)&:(< ?temperatura 22))
 	)
 	=>
 	(assert (cafeProfundidad))
@@ -189,11 +193,13 @@
 	(cafeAltitud)
 	(planta
 		(nombre 'cafe')
-		(altitud ?altitud &:(> ?altitud 1200)|:(< ?altitud 1700))
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
 	)
 	(zona
 		(nombre ?nombre)
-		(altitud ?altitud &:(> ?altitud 1200)|:(< ?altitud 1700))
+		(altitud ?altitud &:(> ?altitud 1200)&:(< ?altitud 1700))
 	)
 	=>
 	(assert (cafeHumedad))
@@ -202,11 +208,13 @@
 	(cafeHumedad)
 	(planta
 		(nombre 'cafe')
-		(humedadRelativa ?humedadRelativa &:(> ?humedadRelativa 70)|:(< ?humedadRelativa 85))
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
 	)
 	(zona
 		(nombre ?nombre)
-		(humedadRelativa ?humedadRelativa &:(> ?humedadRelativa 70)|:(< ?humedadRelativa 85))
+		(humedadRelativa ?humedadRelativa &:(> ?humedadRelativa 70)&:(< ?humedadRelativa 85))
 	)
 	=>
 	(assert (cafePh))
@@ -215,7 +223,7 @@
 	(cafePh)
 	(planta
 		(nombre 'cafe')
-		(phDelSuelo ?phDelSuelo &:(> ?phDelSuelo 5)|:(< ?phDelSuelo 5.5))
+		(phDelSuelo ?phDelSuelo &:(> ?phDelSuelo 5)&:(< ?phDelSuelo 5.5))
 	)
 	=>
 	(assert (cafeFotoperiodo))
@@ -258,20 +266,6 @@
 	=>
 	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ;(defrule CafeCondiciones

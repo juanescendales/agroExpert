@@ -37,6 +37,7 @@ public class InterfazDelSE extends JFrame {
 	private JTextField TTextura;
 	private JTextField TPh;
 	private JTextField TFotoperiodo;
+	private JTextField TProfundidad;
 	
 	
 
@@ -50,7 +51,7 @@ public class InterfazDelSE extends JFrame {
 		
 		// Asignar aspectos basicos de la ventana
 		this.setMinimumSize(new Dimension(250, 350));
-		this.setSize(824, 627);
+		this.setSize(824, 676);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -142,23 +143,38 @@ public class InterfazDelSE extends JFrame {
 		
 		JLabel lblZona = new JLabel("Zona: ");
 		lblZona.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblZona.setBounds(27, 221, 151, 16);
+		lblZona.setBounds(27, 270, 151, 16);
 		getContentPane().add(lblZona);
 		
 		JComboBox cbZona = new JComboBox();
-		cbZona.setModel(new DefaultComboBoxModel(new String[] {"Palestina", "Armenia", "Yopal", "Medellin", "Popayan", "Villavicencio", "Palmira", "Pasto", "Florencia", "Aguazul"}));
-		cbZona.setBounds(242, 219, 116, 22);
+		cbZona.setModel(new DefaultComboBoxModel(new String[] {"Palestina", "Armenia", "Yopal", "Medellin", "Popayan", "Villavicencio", "Palmira", "Pasto", "Florencia", "Aguazul","cafe"}));
+		cbZona.setBounds(242, 268, 116, 22);
 		getContentPane().add(cbZona);
 		
 		JLabel lblPlanta = new JLabel("Planta: ");
 		lblPlanta.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPlanta.setBounds(27, 267, 151, 16);
+		lblPlanta.setBounds(27, 314, 151, 16);
 		getContentPane().add(lblPlanta);
 		
 		JComboBox cbPlanta = new JComboBox();
-		cbPlanta.setModel(new DefaultComboBoxModel(new String[] {"CAFE", "CACAO"}));
-		cbPlanta.setBounds(242, 265, 116, 22);
+		cbPlanta.setModel(new DefaultComboBoxModel(new String[] {"cafe", "cacao"}));
+		cbPlanta.setBounds(242, 312, 116, 22);
 		getContentPane().add(cbPlanta);
+		
+		JLabel lblProfundidadDelSuelo = new JLabel("Profundidad del suelo: ");
+		lblProfundidadDelSuelo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblProfundidadDelSuelo.setBounds(27, 224, 203, 16);
+		getContentPane().add(lblProfundidadDelSuelo);
+		
+		TProfundidad = new JTextField();
+		TProfundidad.setHorizontalAlignment(SwingConstants.CENTER);
+		TProfundidad.setColumns(10);
+		TProfundidad.setBounds(242, 222, 116, 22);
+		getContentPane().add(TProfundidad);
+		
+		JLabel lblMetros = new JLabel("metros");
+		lblMetros.setBounds(370, 225, 56, 16);
+		getContentPane().add(lblMetros);
 		
 		JButton sendButton = new JButton("Obtener recomendacion");
 		sendButton.setBackground(Color.WHITE);
@@ -169,18 +185,21 @@ public class InterfazDelSE extends JFrame {
 	    		TTextura,
 	    		TPh,
 	    		TFotoperiodo,
+	    		TProfundidad,
 	    		textArea,
 	    		motor));
 
-		sendButton.setBounds(325, 331, 178, 29);
+		sendButton.setBounds(318, 362, 178, 29);
 		getContentPane().add(sendButton);
 		
 		JPanel consolePanel = new JPanel();
 		consolePanel.setLayout(new BorderLayout());
-		consolePanel.setBounds(10, 376, 786, 168);
+		consolePanel.setBounds(12, 413, 786, 168);
 		consolePanel.add(console, BorderLayout.CENTER);
 		consolePanel.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
 		getContentPane().add(consolePanel);
+		
+		
 		
 	}
 }
