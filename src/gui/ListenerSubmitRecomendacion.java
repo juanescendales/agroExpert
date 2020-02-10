@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -16,13 +17,8 @@ import jess.JessException;
 
 public class ListenerSubmitRecomendacion implements ActionListener {
 
-	 JTextField TAltitud;
-	 JTextField TTemperatura;
-	 JTextField TPrecipitacion;
-	 JTextField TProfundidad;
-	 JTextField THumedadAbsoluta;
-	 JTextField TVaporDeAgua;
-	 JTextField THumedadRelativa;
+	JComboBox cbPlanta; 
+	JComboBox cbZona;
 	 JTextField TTextura;
 	 JTextField TPh;
 	 JTextField TFotoperiodo;
@@ -31,31 +27,23 @@ public class ListenerSubmitRecomendacion implements ActionListener {
 	 Rete motor;
 
 	 
-    public ListenerSubmitRecomendacion(JTextField TAltitud,
-    		JTextField TTemperatura,
-    		JTextField TPrecipitacion,
-    		JTextField TProfundidad,
-    		JTextField THumedadRelativa,
-    		JTextField THumedadAbsoluta,
-    		JTextField TVaporDeAgua,
+    public ListenerSubmitRecomendacion(
+    		JComboBox cbPlanta,
+    		JComboBox cbZona,
     		JTextField TTextura,
     		JTextField TPh,
     		JTextField TFotoperiodo,
-    		JTextArea textArea) throws JessException {
+    		JTextArea textArea,
+    		Rete motor) throws JessException {
     	
-    	this.TAltitud = TAltitud;
-        this.TTemperatura = TTemperatura;
-        this.TPrecipitacion = TPrecipitacion;
-        this.TProfundidad = TProfundidad;
-        this.THumedadRelativa = THumedadRelativa;
-        this.THumedadAbsoluta = THumedadAbsoluta;
-        this.TVaporDeAgua = TVaporDeAgua;
+    	this.cbPlanta=cbPlanta;
+    	this.cbZona=cbZona;
         this.TTextura = TTextura;
         this.TPh = TPh;
         this.TFotoperiodo = TFotoperiodo;
         this.textArea = textArea;
         
-        motor = new Rete();
+        this.motor = motor;
     }
 
     @Override
@@ -66,9 +54,9 @@ public class ListenerSubmitRecomendacion implements ActionListener {
             	try {
             		motor.batch("src/clp/expertSystemProject.CLP");
             		motor.reset();
-					motor.assertString("(planta (nombre 'cafe') (altitud "+ TAltitud.getText()+") (temperatura "+TTemperatura.getText()
-					+") (precipitacion " + TPrecipitacion.getText() + ") (profundidadDelSuelo " + TProfundidad.getText()+") (humedadRelativa "
-					+ THumedadRelativa.getText() + ") (texturaDelSuelo "+TTextura.getText()+") (phDelSuelo "+ TPh.getText()+") (fotoperiodo '"+ TFotoperiodo.getText()+"'))");
+					//motor.assertString("(planta (nombre 'cafe') (altitud "+ TAltitud.getText()+") (temperatura "+TTemperatura.getText()
+					//+") (precipitacion " + TPrecipitacion.getText() + ") (profundidadDelSuelo " + TProfundidad.getText()+") (humedadRelativa "
+					//+ THumedadRelativa.getText() + ") (texturaDelSuelo "+TTextura.getText()+") (phDelSuelo "+ TPh.getText()+") (fotoperiodo '"+ TFotoperiodo.getText()+"'))");
 					motor.run();
 					motor.executeCommand("(facts)");
 					String text = "";

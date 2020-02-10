@@ -7,7 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import jess.ConsolePanel;
 import jess.JessException;
+import jess.Rete;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 
@@ -46,7 +48,9 @@ public class ListenerSubmit implements ActionListener {
                 // Show output variable
                            
                 try {
-					new InterfazDelSE(Double.toString(texturaSuelo.getVariable("textura").defuzzify()));
+                	Rete motor = new Rete();
+                	ConsolePanel c = new ConsolePanel(motor);
+					new InterfazDelSE(Double.toString(texturaSuelo.getVariable("textura").defuzzify()),c,motor);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

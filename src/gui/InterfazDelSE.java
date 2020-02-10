@@ -8,22 +8,27 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.UIManager;
 
+import jess.ConsolePanel;
 import jess.JessException;
+import jess.Rete;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+
 import javax.swing.JComboBox;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Panel;
+
 
 
 
@@ -35,11 +40,12 @@ public class InterfazDelSE extends JFrame {
 	
 	
 
-	public InterfazDelSE(String textura) throws JessException {
-		super("AgroExpert");
+	public InterfazDelSE(String textura,ConsolePanel c,Rete motor) throws JessException {
+		
         
 		
 		// Asignar nombre a la ventana
+		super("AgroExpert");
 		
 		
 		// Asignar aspectos basicos de la ventana
@@ -48,6 +54,9 @@ public class InterfazDelSE extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
+		
+		//Consola de Jess (Rete)
+		ConsolePanel console = c;
 
 		// Menu
 		JMenuBar menuBar = new JMenuBar();
@@ -129,46 +138,49 @@ public class InterfazDelSE extends JFrame {
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(438, 82, 333, 219);
 		getContentPane().add(textArea);
-		
-		JButton button = new JButton("Obtener recomendacion");
-		button.setBackground(Color.WHITE);
-		button.setActionCommand("Enviar");
-
-		button.setBounds(325, 331, 178, 29);
-		getContentPane().add(button);
+	
 		
 		JLabel lblZona = new JLabel("Zona: ");
 		lblZona.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblZona.setBounds(27, 221, 151, 16);
 		getContentPane().add(lblZona);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Palestina", "Armenia", "Yopal", "Medellin", "Popayan", "Villavicencio", "Palmira", "Pasto", "Florencia", "Aguazul"}));
-		comboBox.setBounds(242, 219, 116, 22);
-		getContentPane().add(comboBox);
+		JComboBox cbZona = new JComboBox();
+		cbZona.setModel(new DefaultComboBoxModel(new String[] {"Palestina", "Armenia", "Yopal", "Medellin", "Popayan", "Villavicencio", "Palmira", "Pasto", "Florencia", "Aguazul"}));
+		cbZona.setBounds(242, 219, 116, 22);
+		getContentPane().add(cbZona);
 		
-		JButton btnNewButton = new JButton("CAFE");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton.setBounds(93, 276, 97, 25);
-		getContentPane().add(btnNewButton);
+		JLabel lblPlanta = new JLabel("Planta: ");
+		lblPlanta.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPlanta.setBounds(27, 267, 151, 16);
+		getContentPane().add(lblPlanta);
 		
-		JButton btnNewButton_1 = new JButton("CACAO");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//ACTION 
-			}
-		});
-		btnNewButton_1.setBounds(230, 276, 97, 25);
-		getContentPane().add(btnNewButton_1);
+		JComboBox cbPlanta = new JComboBox();
+		cbPlanta.setModel(new DefaultComboBoxModel(new String[] {"CAFE", "CACAO"}));
+		cbPlanta.setBounds(242, 265, 116, 22);
+		getContentPane().add(cbPlanta);
 		
-		Panel panel = new Panel();
-		panel.setForeground(Color.WHITE);
-		panel.setBackground(Color.BLACK);
-		panel.setBounds(10, 376, 786, 168);
-		getContentPane().add(panel);
+		JButton sendButton = new JButton("Obtener recomendacion");
+		sendButton.setBackground(Color.WHITE);
+		sendButton.setActionCommand("Enviar");
+		sendButton.addActionListener(new ListenerSubmitRecomendacion(
+				cbPlanta,
+				cbZona,
+	    		TTextura,
+	    		TPh,
+	    		TFotoperiodo,
+	    		textArea,
+	    		motor));
 
+		sendButton.setBounds(325, 331, 178, 29);
+		getContentPane().add(sendButton);
+		
+		JPanel consolePanel = new JPanel();
+		consolePanel.setLayout(new BorderLayout());
+		consolePanel.setBounds(10, 376, 786, 168);
+		consolePanel.add(console, BorderLayout.CENTER);
+		consolePanel.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
+		getContentPane().add(consolePanel);
+		
 	}
 }
