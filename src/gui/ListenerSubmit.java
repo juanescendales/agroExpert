@@ -47,7 +47,7 @@ public class ListenerSubmit implements ActionListener {
                            
                 try {
 					new InterfazDelSE(Double.toString(texturaSuelo.getVariable("textura").defuzzify()));
-				} catch (JessException e1) {
+				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

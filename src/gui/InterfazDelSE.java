@@ -23,10 +23,7 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
 
-import jess.ConsolePanel;
-import jess.Fact;
 import jess.JessException;
-import jess.Rete;
 
 import javax.swing.JTabbedPane;
 import java.awt.event.KeyAdapter;
@@ -48,18 +45,11 @@ public class InterfazDelSE extends JFrame {
 	private JTextField TPh;
 	private JTextField TFotoperiodo;
 	
-	private static Rete motor;
-	
 	
 
 	public InterfazDelSE(String textura) throws JessException {
 		super("AgroExpert");
-		
-		
-        motor = new Rete();
-        motor.batch("src/clp/expertSystemProject.CLP");
         
-        ConsolePanel c = new ConsolePanel(motor);
 		
 		// Asignar nombre a la ventana
 		
@@ -286,49 +276,17 @@ public class InterfazDelSE extends JFrame {
 		JButton button = new JButton("Obtener recomendacion");
 		button.setBackground(Color.WHITE);
 		button.setActionCommand("Enviar");
-		button.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				try {
-					motor.assertString("(planta (nombre 'cafe') (altitud "+ TAltitud.getText()+") (temperatura "+TTemperatura.getText()
-					+") (precipitacion " + TPrecipitacion.getText() + ") (profundidadDelSuelo " + TProfundidad.getText()+") (humedadRelativa "
-					+ THumedadRelativa.getText() + ") (texturaDelSuelo "+TTextura.getText()+") (phDelSuelo "+ TPh.getText()+") (fotoperiodo "+ TFotoperiodo.getText()+"))");
-				} catch (JessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				try {
-					motor.executeCommand("(facts)");
-				} catch (JessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				String text = "";
-				
-				try {
-					motor.run();
-					
-					Iterator it = motor.listFacts();
-					Fact faux;
-					
-					while(it.hasNext()) {
-						faux = (Fact) it.next();
-						if(faux.getName().equals("MAIN::respuesta")) {
-							System.out.println("funciona");
-							text+=faux.getSlotValue("print");
-						}
-					}
-					textArea.setText(text);
-				} catch (JessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		});
+		button.addActionListener(new ListenerSubmitRecomendacion(TAltitud,
+	    		TTemperatura,
+	    		TPrecipitacion,
+	    		TProfundidad,
+	    		THumedadRelativa,
+	    		THumedadAbsoluta,
+	    		TVaporDeAgua,
+	    		TTextura,
+	    		TPh,
+	    		TFotoperiodo,
+	    		textArea));
 		button.setBounds(323, 406, 178, 29);
 		getContentPane().add(button);
 
