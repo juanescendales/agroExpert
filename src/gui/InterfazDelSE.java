@@ -23,6 +23,9 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
 import javax.swing.JTabbedPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.Button;
 
 
 @SuppressWarnings("serial")
@@ -37,14 +40,16 @@ public class InterfazDelSE extends JFrame {
 	private JTextField TTextura;
 	private JTextField TPh;
 	private JTextField TFotoperiodo;
+	
+	
 
 	public InterfazDelSE(String textura) {
 		// Asignar nombre a la ventana
 		super("AgroExpert");
-
+		
 		// Asignar aspectos basicos de la ventana
 		this.setMinimumSize(new Dimension(250, 350));
-		this.setSize(824, 481);
+		this.setSize(824, 530);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -159,12 +164,45 @@ public class InterfazDelSE extends JFrame {
 		TProfundidad.setColumns(10);
 		
 		THumedadAbsoluta = new JTextField();
+		THumedadAbsoluta.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				try {
+					double HA = Double.parseDouble(THumedadAbsoluta.getText());
+					double VA = Double.parseDouble(TVaporDeAgua.getText());
+			        double hr=HA/VA;
+			        THumedadRelativa.setText(Double.toString(Math.round(hr* 100.0)/100.0));
+
+			    } catch (Exception e) {
+
+			    	THumedadRelativa.setText("0");
+
+			    }
+			}
+		});
 		THumedadAbsoluta.setHorizontalAlignment(SwingConstants.CENTER);
 		THumedadAbsoluta.setBounds(242, 230, 116, 22);
 		getContentPane().add(THumedadAbsoluta);
 		THumedadAbsoluta.setColumns(10);
 		
+		
 		TVaporDeAgua = new JTextField();
+		TVaporDeAgua.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				try {
+					double HA = Double.parseDouble(THumedadAbsoluta.getText());
+					double VA = Double.parseDouble(TVaporDeAgua.getText());
+			        double hr=HA/VA;
+			        THumedadRelativa.setText(Double.toString(Math.round(hr* 100.0)/100.0));
+
+			    } catch (Exception e) {
+
+			    	THumedadRelativa.setText("0");
+
+			    }
+			}
+		});
 		TVaporDeAgua.setHorizontalAlignment(SwingConstants.CENTER);
 		TVaporDeAgua.setBounds(242, 259, 116, 22);
 		getContentPane().add(TVaporDeAgua);
@@ -227,6 +265,22 @@ public class InterfazDelSE extends JFrame {
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(507, 82, 264, 286);
 		getContentPane().add(textArea);
+		
+		Button button = new Button("Obtener recomendacion");
+		button.setBackground(Color.WHITE);
+		button.setActionCommand("Enviar");
+		button.addActionListener(new ListenerSubmitRecomendacion(TAltitud,
+	    		TTemperatura,
+	    		TPrecipitacion,
+	    		TProfundidad,
+	    		THumedadRelativa,
+	    		THumedadAbsoluta,
+	    		TVaporDeAgua,
+	    		TTextura,
+	    		TPh,
+	    		TFotoperiodo));
+		button.setBounds(323, 406, 178, 29);
+		getContentPane().add(button);
 
 	}
 }
