@@ -2,18 +2,64 @@
 ;--------------------------------------------------------------
 ;-------------------Plantillas---------------------------------
 ;--------------------------------------------------------------
-;Cafe arábico
+;La plantilla es la misma para todas las plantas
 (deftemplate planta
-	(slot 
+	(slot altitud
+		(type INTEGER)
+	)
+	(slot temperatura
+		(type INTEGER)
+	)
+	(slot precipitacion
+		(type INTEGER)	
+	)
+	(slot profundidadDelSuelo
+		(type INTEGER)
+	)
+	(slot humedadRelativa
+		(type INTEGER)
+		(range 0 100)
+	)
+	(slot texturaDelSuelo
 		(type STRING)
+		(allowed-strings "pesada" "moderadamentePesada" "media" "moderadamenteLigera" "ligera")
 	)
-	(slot ciudad
+	(slot phDelSuelo
+		(type INTEGER)
+	)
+	(slot fotoperiodo
 		(type STRING)
+		(allowed-strings "diaLargo" "diaNeutro" "diaCorto")
 	)
-	(slot sector
-		(type STRING)	
+)
+(deftemplate ambiente
+	(slot altitud
+		(type INTEGER)
 	)
-	(slot edad
+	(slot temperatura
+		(type INTEGER)
+	)
+	(slot precipitacion
+		(type INTEGER)	
+	)
+	(slot humedadRelativa
+		(type INTEGER)
+		(range 0 100)
+	)
+	(slot fotoperiodo
+		(type STRING)
+		(allowed-strings "diaLargo" "diaNeutro" "diaCorto")
+	)
+)
+(deftemplate suelo
+	(slot profundidadDelSuelo
+		(type INTEGER)
+	)
+	(slot texturaDelSuelo
+		(type STRING)
+		(allowed-strings "pesada" "moderadamentePesada" "media" "moderadamenteLigera" "ligera")
+	)
+	(slot phDelSuelo
 		(type INTEGER)
 	)
 )
@@ -22,109 +68,12 @@
 ;----------------------Hechos Iniciales-------------------------
 ;---------------------------------------------------------------
 (deffacts hechos_iniciales
-	(menu)
-	(gobierno
-		(ciudad "Medellin")
-	)
-	(gobierno
-		(ciudad "Barbosa")
-	)
-	(gobierno
-		(ciudad "Envigado")
-	)
-	(gobierno
-		(ciudad "Itagüí")
-	)
-	(gobierno
-		(ciudad "Caldas")
-	)
-	(gobierno
-		(ciudad "Sabaneta")
-	)
-	(gobierno
-		(ciudad "Bello")
-	)
-	(gobierno
-		(ciudad "Copacabana")
-	)
-	(gobierno
-		(ciudad "Girardota")
-	)
-	(gobierno
-		(ciudad "La Estrella")
-	)
-	(sector
-		(nombre "Hatillo")
-		(ciudad "Barbosa")
-		(ica 59)
-	)
-	(sector
-		(nombre "Frontera")
-		(ciudad "Envigado")
-		(ica 68)
-	)
-	(sector
-		(nombre "Calasanz")
-		(ciudad "Medellin")
-		(ica 500)
-	)
-	(sector
-		(nombre "Poblado")
-		(ciudad "Medellin")
-		(ica 500)
-	)
-	(sector
-		(nombre "Centro")
-		(ciudad "Medellin")
-		(ica 500)
-	)
-	(sector
-		(nombre "Platanito")
-		(ciudad "Barbosa")
-		(ica 40)
-	)
-	(sector
-		(nombre "Tablaza")
-		(ciudad "Caldas")
-		(ica 180)
-	)
-	(sector
-		(nombre "Rosalpi")
-		(ciudad "Bello")
-		(ica 155)
-	)
+	
 )
 
 ;---------------------------------------------------------------
 ;---------------------------REGLAS------------------------------
 ;---------------------------------------------------------------
-
-;Variables globales
-(defglobal
-	?*cont* = 0
-	?*suma* = 0 
-	?*prom* = 0
-)
-(deffunction promedio (?a) "funcion para sacar el promedio"
-	(bind ?*cont* (+ ?*cont* 1))
-	(bind ?*suma*(+ ?*suma* ?a))
-	(bind ?*prom* (/ ?*suma* ?*cont*))
-)
-;Menu de consola
-(defrule menu
-	?hecho <- (menu)
-	=>
-	(printout t "----------Menu----------" crlf)
-	(printout t "Elija el tipo de usuario:" crlf)
-	(printout t "1. Persona Natural" crlf)
-	(printout t "2. Alcaldía" crlf)
-	(bind ?opcion (read))
-	(if (eq ?opcion 1) then
-		(assert (ingresar_usuario))
-	else
-		(assert (recomendar_gobierno))
-	)
-)
 
 ;Regla para ingresar usuario
 (defrule ingresar_usuario
