@@ -316,9 +316,9 @@ public class InterfazDelSE extends JFrame {
 					
 					while(it.hasNext()) {
 						faux = (Fact) it.next();
-						if(faux.getName().equals("MAIN::respuesta")) {
+						if(faux.getName().equals("MAIN::planta")) {
 							System.out.println("funciona");
-							text+=faux.getSlotValue("print");
+							text+=faux.getSlotValue("profundidadDelSuelo");
 						}
 					}
 					textArea.setText(text);
