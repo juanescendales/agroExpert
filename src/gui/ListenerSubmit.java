@@ -51,13 +51,13 @@ public class ListenerSubmit implements ActionListener {
                 if(resultado <= 20) {
                 	resultadoString = "ligera";
                 }else if(resultado<=40) {
-                	resultadoString = "Moderadamente ligera";
+                	resultadoString = "moderadamenteLigera";
                 }else if(resultado<= 60) {
-                	resultadoString = "Media";
+                	resultadoString = "media";
                 }else if(resultado<=80) {
-                	resultadoString = "Moderadamente pesada";
+                	resultadoString = "moderadamentePesada";
                 }else {
-                	resultadoString = "Pesada";
+                	resultadoString = "pesada";
                 }
                 try {
                 	Rete motor = new Rete();

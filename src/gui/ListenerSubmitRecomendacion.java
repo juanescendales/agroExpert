@@ -54,11 +54,19 @@ public class ListenerSubmitRecomendacion implements ActionListener {
         if (e.getSource() instanceof JButton) {
             if ("Enviar".equals(actionCommand)) {
             	try {
+            		String fotoperiodo="";
+            		if(Double.parseDouble(TFotoperiodo.getText())>14) {
+            			fotoperiodo="diaLargo";
+            		}else if(Double.parseDouble(TFotoperiodo.getText())<12) {
+            			fotoperiodo="diaCorto";
+            		}else {
+            			fotoperiodo="diaNeutro";
+            		}
             		motor.batch("src/clp/expertSystemProject.CLP");
             		motor.reset();
 					motor.assertString("(planta (nombre '"+(String)cbPlanta.getSelectedItem()+"')"
 					+"(profundidadDelSuelo " + TProfundidad.getText()+")"
-					+"(texturaDelSuelo '"+TTextura.getText()+"') (phDelSuelo "+ TPh.getText()+") (fotoperiodo '"+ TFotoperiodo.getText()+"'))");
+					+"(texturaDelSuelo '"+TTextura.getText()+"') (phDelSuelo "+ TPh.getText()+") (fotoperiodo '"+ fotoperiodo +"'))");
 					motor.assertString("(zonaSeleccionada (nombre '"+(String)cbZona.getSelectedItem()+"'))");
 					motor.run();
 					motor.executeCommand("(facts)");
