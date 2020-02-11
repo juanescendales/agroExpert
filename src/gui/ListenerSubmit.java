@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import jess.ConsolePanel;
+import jess.JessException;
+import jess.Rete;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 
@@ -43,13 +46,29 @@ public class ListenerSubmit implements ActionListener {
                 JFuzzyChart.get().chart(texturaSuelo.getFunctionBlock("texturaSuelo"));
 
                 // Show output variable
-
-                TA1.setText(TA1.getText() + "El indicador de textura es: " + texturaSuelo.getVariable("textura").defuzzify());
-                TA1.setText(TA1.getText() + "\n \n" + "El metodo usado para 'defuzzificar' la textura fue: " + texturaSuelo.getVariable("textura").getDefuzzifier());
-                TA1.setEditable(false);
                 
-                
-                
+                double resultado = texturaSuelo.getVariable("textura").defuzzify();
+                System.out.println(resultado);
+                String resultadoString = "";
+                if(resultado <= 20) {
+                	resultadoString = "ligera";
+                }else if(resultado<=40) {
+                	resultadoString = "moderadamenteLigera";
+                }else if(resultado<= 60) {
+                	resultadoString = "media";
+                }else if(resultado<=80) {
+                	resultadoString = "moderadamentePesada";
+                }else {
+                	resultadoString = "pesada";
+                }
+                try {
+                	Rete motor = new Rete();
+                	ConsolePanel c = new ConsolePanel(motor);
+					new InterfazDelSE(resultadoString,c,motor);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 
                 
             }

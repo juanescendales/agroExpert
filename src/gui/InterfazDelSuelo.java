@@ -18,9 +18,9 @@ import javax.swing.JTextField;
 
 
 @SuppressWarnings("serial")
-public class InterfazDelUsuario extends JFrame {
+public class InterfazDelSuelo extends JFrame {
 
-	public InterfazDelUsuario() {
+	public InterfazDelSuelo() {
 		// Asignar nombre a la ventana
 		super("AgroExpert");
 

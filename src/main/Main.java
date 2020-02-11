@@ -1,8 +1,11 @@
 package main;
-import gui.InterfazDelUsuario;
+import gui.InterfazDelSuelo;
+import jess.ConsolePanel;
+import jess.JessException;
+import jess.Rete;
 public class Main {
 
-    public static void main(String[] args) {
-        new InterfazDelUsuario();
+    public static void main(String[] args) throws JessException {
+        new InterfazDelSuelo();
     }
 }
