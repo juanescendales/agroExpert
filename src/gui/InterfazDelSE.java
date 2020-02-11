@@ -178,7 +178,7 @@ public class InterfazDelSE extends JFrame {
 		getContentPane().add(lblZona);
 		
 		JComboBox cbZona = new JComboBox();
-		cbZona.setModel(new DefaultComboBoxModel(new String[] {"Palestina", "Armenia", "Yopal", "Medellin", "Popayan", "Villavicencio", "Palmira", "Pasto", "Florencia", "Aguazul","cafe"}));
+		cbZona.setModel(new DefaultComboBoxModel(new String[] {"Palestina", "Armenia", "Yopal", "Medellin", "Popayan", "Villavicencio", "Palmira", "Pasto", "Florencia", "Aguazul","cafe","cacao"}));
 		cbZona.setBounds(242, 319, 116, 22);
 		getContentPane().add(cbZona);
 		
