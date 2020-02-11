@@ -46,11 +46,23 @@ public class ListenerSubmit implements ActionListener {
                 JFuzzyChart.get().chart(texturaSuelo.getFunctionBlock("texturaSuelo"));
 
                 // Show output variable
-                           
+                double resultado = texturaSuelo.getVariable("textura").defuzzify();
+                String resultadoString = "";
+                if(resultado <= 20) {
+                	resultadoString = "ligera";
+                }else if(resultado<=40) {
+                	resultadoString = "Moderadamente ligera";
+                }else if(resultado<= 60) {
+                	resultadoString = "Media";
+                }else if(resultado<=80) {
+                	resultadoString = "Moderadamente pesada";
+                }else {
+                	resultadoString = "Pesada";
+                }
                 try {
                 	Rete motor = new Rete();
                 	ConsolePanel c = new ConsolePanel(motor);
-					new InterfazDelSE(Double.toString(texturaSuelo.getVariable("textura").defuzzify()),c,motor);
+					new InterfazDelSE(resultadoString,c,motor);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

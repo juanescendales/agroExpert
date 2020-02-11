@@ -65,25 +65,31 @@ RULEBLOCK No1
                 THEN textura IS pesada;
     RULE 2 : IF porcentajeArenoso IS altoMediano AND (porcentajeLimoso IS poco OR porcentajeLimoso IS pocoMediano) AND porcentajeArcilloso IS poco 
                 THEN textura IS pesada;               
-    RULE 3 : IF (porcentajeArenoso IS altoMediano OR porcentajeArenoso IS mediano) AND (porcentajeLimoso IS poco OR porcentajeLimoso IS pocoMediano OR porcentajeLimoso IS mediano )AND porcentajeArcilloso IS poco
+    RULE 3 : IF (porcentajeArenoso IS altoMediano OR porcentajeArenoso IS mediano) AND porcentajeLimoso IS poco AND porcentajeArcilloso IS poco
+                THEN textura IS moderadamentePesada;       
+    RULE 4 : IF (porcentajeArenoso IS altoMediano OR porcentajeArenoso IS mediano) AND porcentajeLimoso IS pocoMediano AND porcentajeArcilloso IS poco
                 THEN textura IS moderadamentePesada;
-    RULE 4 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS pocoMediano) AND (porcentajeLimoso IS mediano OR porcentajeLimoso IS pocoMediano) AND porcentajeArcilloso IS poco 
+    RULE 5 : IF (porcentajeArenoso IS altoMediano OR porcentajeArenoso IS mediano) AND porcentajeLimoso IS mediano AND porcentajeArcilloso IS poco
+                THEN textura IS moderadamentePesada;
+    RULE 6 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS pocoMediano) AND (porcentajeLimoso IS mediano OR porcentajeLimoso IS pocoMediano) AND porcentajeArcilloso IS poco 
                 THEN textura IS media;
-    RULE 5 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS pocoMediano) AND porcentajeLimoso IS altoMediano AND porcentajeArcilloso IS poco 
+    RULE 7 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS pocoMediano) AND porcentajeLimoso IS altoMediano AND porcentajeArcilloso IS poco 
                 THEN textura IS media;
-    RULE 6 : IF porcentajeArenoso IS poco AND porcentajeLimoso IS alto AND porcentajeArcilloso IS poco 
+    RULE 8 : IF porcentajeArenoso IS poco AND porcentajeLimoso IS alto AND porcentajeArcilloso IS poco 
                 THEN textura IS media;
-    RULE 7 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS pocoMediano) AND (porcentajeLimoso IS mediano OR porcentajeLimoso IS pocoMediano) AND porcentajeArcilloso IS pocoMediano 
+    RULE 9 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS pocoMediano) AND (porcentajeLimoso IS mediano OR porcentajeLimoso IS pocoMediano) AND porcentajeArcilloso IS pocoMediano 
                 THEN textura IS moderadamenteLigera;
-    RULE 8 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS altoMediano) AND porcentajeLimoso IS poco AND porcentajeArcilloso IS pocoMediano 
+    RULE 10 : IF (porcentajeArenoso IS mediano OR porcentajeArenoso IS altoMediano) AND porcentajeLimoso IS poco AND porcentajeArcilloso IS pocoMediano 
                 THEN textura IS moderadamenteLigera;
-    RULE 9 : IF porcentajeArenoso IS poco AND (porcentajeLimoso IS mediano OR porcentajeLimoso IS altoMediano) AND porcentajeArcilloso IS pocoMediano 
+    RULE 11 : IF porcentajeArenoso IS poco AND  porcentajeLimoso IS altoMediano AND porcentajeArcilloso IS pocoMediano 
                 THEN textura IS moderadamenteLigera;
-    RULE 10 : IF porcentajeArenoso IS mediano AND porcentajeLimoso IS poco AND porcentajeArcilloso IS mediano 
+    RULE 12 : IF porcentajeArenoso IS poco AND porcentajeLimoso IS mediano  AND porcentajeArcilloso IS pocoMediano 
+                THEN textura IS moderadamenteLigera;
+    RULE 13 :IF porcentajeArenoso IS mediano AND porcentajeLimoso IS poco AND porcentajeArcilloso IS mediano 
                 THEN textura IS ligera;
-    RULE 11 :IF porcentajeArenoso IS poco AND porcentajeLimoso IS mediano AND porcentajeArcilloso IS mediano 
+    RULE 14 :IF porcentajeArenoso IS poco AND porcentajeLimoso IS mediano AND porcentajeArcilloso IS mediano 
                 THEN textura IS ligera;
-    RULE 12 :IF (porcentajeArenoso IS poco OR porcentajeArenoso IS pocoMediano) AND (porcentajeLimoso IS poco OR porcentajeLimoso IS pocoMediano) AND (porcentajeArcilloso IS mediano OR porcentajeArcilloso IS altoMediano OR porcentajeArcilloso IS alto)
+    RULE 15 :IF (porcentajeArenoso IS poco OR porcentajeArenoso IS pocoMediano) AND (porcentajeLimoso IS poco OR porcentajeLimoso IS pocoMediano) AND (porcentajeArcilloso IS mediano OR porcentajeArcilloso IS altoMediano OR porcentajeArcilloso IS alto)
                 THEN textura IS ligera;
 
 
