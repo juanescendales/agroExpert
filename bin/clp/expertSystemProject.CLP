@@ -56,6 +56,7 @@
 ;---------------------------------------------------------------
 (deffacts hechos_iniciales
 	(cafePrecipitacion)
+	(cafePrecipitacionN)
 	(zona
 		(nombre 'Palestina')
 		(altitud 1603)
@@ -164,6 +165,53 @@
 	)
 	=>
 	(assert (cafeTemperatura))
+	(assert (cafeTemperaturaN))
+)
+(defrule cafePrecipitacionN
+	?hecho <- (cafePrecipitacionN)
+	(planta
+		(nombre 'cafe')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(precipitacion ?precipitacion &:(< ?precipitacion 1500)|:(> ?precipitacion 2000))
+	)
+	=>
+	(assert (cafePrecipitacionN1))
+	(assert (cafePrecipitacionN2))
+)
+(defrule cafePrecipitacionN1
+	(cafePrecipitacionN1)
+	(planta
+		(nombre 'cafe')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(precipitacion ?precipitacion &:(> ?precipitacion 1000))
+	)
+	=>
+	(assert (respuesta (print "Se encuentra en una precipitación poco adecuada pero tolerable, lo ideal es tener una precipitación por lo menos de 1500")))
+)
+(defrule cafePrecipitacionN2
+	(cafePrecipitacionN2)
+	(planta
+		(nombre 'cafe')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(precipitacion ?precipitacion &:(< ?precipitacion 1000))
+	)
+	=>
+	(assert (respuesta (print "No se encuentra en una precipitación adecuada que puede resultar adversa para su producción y desarrollo")))
 )
 (defrule cafeTemperatura
 	(cafeTemperatura)
@@ -179,6 +227,62 @@
 	)
 	=>
 	(assert (cafeProfundidad))
+	(assert (cafeProfundidadN))
+)
+(defrule cafeProfundidadN
+	(cafeProfundidadN)
+	(planta
+		(nombre 'cafe')
+		(profundidadDelSuelo ?pr &:(< ?pr 1))
+	)
+	=>
+	(assert (respuesta (print "No se encuentra en la profundidad de suelo optima para el crecimiento de sus raices")))
+)
+(defrule cafeTemperaturaN
+	(cafeTemperaturaN)
+	(planta
+		(nombre 'cafe')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(temperatura ?temperatura &:(< ?temperatura 16)|:(> ?temperatura 22))
+	)
+	=>
+	(assert (cafeTemperaturaN1))
+	(assert (cafeTemperaturaN2))
+)
+(defrule cafeTemperaturaN1
+	(cafeTemperaturaN1)
+	(planta
+		(nombre 'cafe')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(temperatura ?temperatura &:(> ?temperatura 13)&:(< ?temperatura 27))
+	)
+	=>
+	(assert (respuesta (print "La planta no tiene las condiciones optimas para su producción en cuanto temperatura, debería estar entre los 16 y 22 grados centigrados")))
+)
+(defrule cafeTemperaturaN2
+	(cafeTemperaturaN2)
+	(planta
+		(nombre 'cafe')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(temperatura ?temperatura &:(< ?temperatura 13)|:(> ?temperatura 27))
+	)
+	=>
+	(assert (respuesta (print "La planta esta en riesgo de sufrir daños respecto a la temperatura")))
 )
 (defrule cafeProfundidad
 	(cafeProfundidad)
@@ -188,6 +292,22 @@
 	)
 	=>
 	(assert (cafeAltitud))
+	(assert (cafeAltitudN))
+)
+(defrule cafeAltitudN
+	(cafeAltitudN)
+	(planta
+		(nombre 'cafe')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(altitud ?altitud &:(< ?altitud 1200)|:(> ?altitud 1700))
+	)
+	=>
+	(assert (respuesta (print "La  altitud del terreno no es la optima para su producción, debería estar entre los 1200 y 1700 m")))
 )
 (defrule cafeAltitud
 	(cafeAltitud)
@@ -203,6 +323,22 @@
 	)
 	=>
 	(assert (cafeHumedad))
+	(assert (cafeHumedadN))
+)
+(defrule cafeHumedadN
+	(cafeHumedadN)
+	(planta
+		(nombre 'cafe')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(humedadRelativa ?humedadRelativa &:(< ?humedadRelativa 70)|:(> ?humedadRelativa 85))
+	)
+	=>
+	(assert (respuesta (print "La humedad relativa no es la optima para la planta")))
 )
 (defrule cafeHumedad
 	(cafeHumedad)
@@ -218,6 +354,16 @@
 	)
 	=>
 	(assert (cafePh))
+	(assert (cafePhN))
+)
+(defrule cafePhN
+	(cafePhN)
+	(planta
+		(nombre 'cafe')
+		(phDelSuelo ?phDelSuelo &:(< ?phDelSuelo 5)|:(> ?phDelSuelo 5.5))
+	)
+	=>
+	(assert (respuesta (print "El PH del suelo no es optimo, se dificulta la nutrición del cultivo, debe estar entre 5 y 5.5")))
 )
 (defrule cafePh
 	(cafePh)
@@ -227,6 +373,16 @@
 	)
 	=>
 	(assert (cafeFotoperiodo))
+	(assert (cafeFotoperiodoN))
+)
+(defrule cafeFotoperiodoN
+	(cafeFotoperiodoN)
+	(planta
+		(nombre 'cafe')
+		(fotoperiodo 'diaCorto')
+	)
+	=>
+	(assert (respuesta (print "EL proceso de floración pordria verse afectado, hay que disminuir la cantidad de horas al sol")))
 )
 (defrule cafeFotoperiodo
 	(cafeFotoperiodo)
@@ -238,6 +394,27 @@
 	(assert (cafeTextura1))
 	(assert (cafeTextura2))
 	(assert (cafeTextura3))
+	(assert (cafeTextura1N))
+	(assert (cafeTextura2N))
+	(assert (cafeTextura3N))
+)
+(defrule cafeTextura1N
+	(cafeTextura1N)
+	(planta
+		(nombre 'cafe')
+		(texturaDelSuelo 'ligera')
+	)
+	=>
+	(assert (respuesta (print "El café necesita de texturas mas pesadas para su producción optima")))
+)
+(defrule cafeTextura2N
+	(cafeTextura2N)
+	(planta
+		(nombre 'cafe')
+		(texturaDelSuelo 'moderadamenteLigera')
+	)
+	=>
+	(assert (respuesta (print "El café necesita de texturas mas pesadas para su producción optima")))
 )
 (defrule cafeTextura1
 	(cafeTextura1)
@@ -249,7 +426,7 @@
 	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
 )
 (defrule cafeTextura2
-	(cafeTextura1)
+	(cafeTextura2)
 	(planta
 		(nombre 'cafe')
 		(texturaDelSuelo 'moderadamentePesada')
@@ -258,7 +435,7 @@
 	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
 )
 (defrule cafeTextura3
-	(cafeTextura1)
+	(cafeTextura3)
 	(planta
 		(nombre 'cafe')
 		(texturaDelSuelo 'pesada')
@@ -266,63 +443,3 @@
 	=>
 	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
 )
-
-
-;(defrule CafeCondiciones
-;	?hecho <- (CafeCondiciones)
-;	(planta
-;		(nombre "cafe")
-;		(precipitacion ?p &:(< ?p 2000))
-;		(precipitacion ?p &:(> ?p 1500))
-;		(temperatura ?t &:(< ?p 22))
-;		(temperatura ?t &:(> ?p 16))
-;		(profundidadDelSuelo ?pr &:(> ?pr 1))
-;		(altitud ?a &:(> ?p 1200))
-;		(altitud ?a &:(< ?p 1700))
-;		(humedadRelativa ?hr &:(> ?hr 70))
-;		(humedadRelativa ?hr &:(< ?hr 85))
-;		(phDelSuelo ?ph &:(> ?ph 5))
-;		(phDelSuelo ?ph &:(< ?ph 5.5))
-;		(fotoperiodo "diaCorto")
-;		(texturaDelSuelo ("media" | "moderadamentePesada" | "pesada"))
-;	)
-;	(zona
-;		(nombre ?nombre)
-;		(precipitacion ?p &:(< ?p 2000))
-;		(precipitacion ?p &:(> ?p 1500))
-;		(temperatura ?t &:(< ?p 22))
-;		(temperatura ?t &:(> ?p 16))
-;		(altitud ?a &:(> ?p 1200))
-;		(altitud ?a &:(< ?p 1700))
-;		(humedadRelativa ?hr &:(> ?hr 70))
-;		(humedadRelativa ?hr &:(< ?hr 85))
-;	)
-;	=>
-;	(assert (respuesta (print "La planta presenta, en " ?nombre ", un estado optimo")))
-;	
-;)
-;(defrule cafePrecipitacion
-;	?hecho <- (cafePrecipitacion)
-;	(planta
-;		(nombre "cafe")
-;		(precipitacion ?p &:(< ?p 1500))
-;		(precipitacion ?p &:(> ?p 1000))
-;	)
-;	(zona
-;		(nombre ?nombre)
-;		(precipitacion ?p &:(< ?p 1500))
-;		(precipitacion ?p &:(> ?p 1000))
-;	)
-;	=>
-;	(assert (respuesta (print "En " ?nombre " se encuentra en una precipitación poco adecuada pero tolerable, lo ideal es tener una precipitación por lo menos de 1500")))
-;)
-
-
-
-
-
-
-
-
-
-
