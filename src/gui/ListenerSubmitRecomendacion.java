@@ -13,6 +13,8 @@ import jess.Rete;
 import jess.Fact;
 import jess.JessException;
 
+import javax.swing.JOptionPane;
+
 
 
 public class ListenerSubmitRecomendacion implements ActionListener {
@@ -23,7 +25,6 @@ public class ListenerSubmitRecomendacion implements ActionListener {
 	 JTextField TPh;
 	 JTextField TFotoperiodo;
 	 JTextField TProfundidad;
-	 JTextArea textArea;
 	 
 	 Rete motor;
 
@@ -35,7 +36,6 @@ public class ListenerSubmitRecomendacion implements ActionListener {
     		JTextField TPh,
     		JTextField TFotoperiodo,
     		JTextField TProfundidad,
-    		JTextArea textArea,
     		Rete motor) throws JessException {
     	
     	this.cbPlanta=cbPlanta;
@@ -44,8 +44,6 @@ public class ListenerSubmitRecomendacion implements ActionListener {
         this.TPh = TPh;
         this.TFotoperiodo = TFotoperiodo;
         this.TProfundidad = TProfundidad;
-        
-        this.textArea = textArea;
         
         this.motor = motor;
     }
@@ -75,7 +73,7 @@ public class ListenerSubmitRecomendacion implements ActionListener {
 							text+=faux.getSlotValue("print");
 						}
 					}
-					textArea.setText(text);
+					JOptionPane.showMessageDialog(null,text.substring(1,text.length()-1),"Resultado", 1);
             	} catch (JessException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
