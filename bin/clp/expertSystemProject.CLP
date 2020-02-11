@@ -150,7 +150,7 @@
 ;---------------------------------------------------------------
 ;---------------------------REGLAS------------------------------
 ;---------------------------------------------------------------
-
+;Reglas café
 (defrule cafePrecipitacion
 	?hecho <- (cafePrecipitacion)
 	(planta
@@ -373,13 +373,23 @@
 	)
 	=>
 	(assert (cafeFotoperiodo))
-	(assert (cafeFotoperiodoN))
+	(assert (cafeFotoperiodoN1))
+	(assert (cafeFotoperiodoN2))
 )
-(defrule cafeFotoperiodoN
-	(cafeFotoperiodoN)
+(defrule cafeFotoperiodoN1
+	(cafeFotoperiodoN1)
 	(planta
 		(nombre 'cafe')
-		(fotoperiodo 'diaCorto')
+		(fotoperiodo 'diaNeutro')
+	)
+	=>
+	(assert (respuesta (print "EL proceso de floración pordria verse afectado, hay que disminuir la cantidad de horas al sol")))
+)
+(defrule cafeFotoperiodoN2
+	(cafeFotoperiodoN2)
+	(planta
+		(nombre 'cafe')
+		(fotoperiodo 'diaLargo')
 	)
 	=>
 	(assert (respuesta (print "EL proceso de floración pordria verse afectado, hay que disminuir la cantidad de horas al sol")))
@@ -443,3 +453,10 @@
 	=>
 	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
 )
+
+
+
+
+
+
+
