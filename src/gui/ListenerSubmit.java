@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -33,7 +34,11 @@ public class ListenerSubmit implements ActionListener {
         if (e.getSource() instanceof JButton) {
             if ("Enviar".equals(actionCommand)) {
                 FIS texturaSuelo = FIS.load("src/fuzzy/agroexpertFCL.fcl", true);
-
+                double suma = Double.parseDouble(T1.getText()) + Double.parseDouble(T2.getText()) + Double.parseDouble(T3.getText());
+                if(suma != 100) {
+                	JOptionPane.showMessageDialog(null,"Los porcentajes tienen que sumar 100","Alerta", 1);
+                	return;
+                }
                 // Set inputs
                 texturaSuelo.setVariable("porcentajeArenoso", Double.parseDouble(T1.getText()));
                 texturaSuelo.setVariable("porcentajeLimoso", Double.parseDouble(T2.getText()));
