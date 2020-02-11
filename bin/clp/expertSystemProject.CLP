@@ -170,7 +170,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(precipitacion ?precipitacion &:(> ?precipitacion 1500)&:(< ?precipitacion 2000))
+		(precipitacion ?precipitacion &:(> ?precipitacion 1499)&:(< ?precipitacion 2001))
 	)
 	=>
 	(assert (cafeTemperatura))
@@ -232,7 +232,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(temperatura ?temperatura &:(> ?temperatura 16)&:(< ?temperatura 22))
+		(temperatura ?temperatura &:(> ?temperatura 15)&:(< ?temperatura 23))
 	)
 	=>
 	(assert (cafeProfundidad))
@@ -273,7 +273,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(temperatura ?temperatura &:(> ?temperatura 13)&:(< ?temperatura 27))
+		(temperatura ?temperatura &:(> ?temperatura 12)&:(< ?temperatura 28))
 	)
 	=>
 	(assert (respuesta (print "La planta no tiene las condiciones optimas para su producción en cuanto temperatura, debería estar entre los 16 y 22 grados centigrados")))
@@ -328,7 +328,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(altitud ?altitud &:(> ?altitud 1200)&:(< ?altitud 1700))
+		(altitud ?altitud &:(> ?altitud 1199)&:(< ?altitud 1701))
 	)
 	=>
 	(assert (cafeHumedad))
@@ -359,7 +359,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(humedadRelativa ?humedadRelativa &:(> ?humedadRelativa 70)&:(< ?humedadRelativa 85))
+		(humedadRelativa ?humedadRelativa &:(> ?humedadRelativa 69)&:(< ?humedadRelativa 86))
 	)
 	=>
 	(assert (cafePh))
@@ -378,7 +378,7 @@
 	(cafePh)
 	(planta
 		(nombre 'cafe')
-		(phDelSuelo ?phDelSuelo &:(> ?phDelSuelo 5)&:(< ?phDelSuelo 5.5))
+		(phDelSuelo ?phDelSuelo &:(> ?phDelSuelo 4.9)&:(< ?phDelSuelo 5.6))
 	)
 	=>
 	(assert (cafeFotoperiodo))
@@ -493,7 +493,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(precipitacion ?precipitacion &:(> ?precipitacion 1500)&:(< ?precipitacion 2400))
+		(precipitacion ?precipitacion &:(> ?precipitacion 1499)&:(< ?precipitacion 2401))
 	)
 	=>
 	(assert (cacaoTemperatura))
@@ -555,7 +555,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(temperatura ?temperatura &:(> ?temperatura 23)&:(< ?temperatura 28))
+		(temperatura ?temperatura &:(> ?temperatura 22)&:(< ?temperatura 29))
 	)
 	=>
 	(assert (cacaoProfundidad))
@@ -596,7 +596,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(temperatura ?temperatura &:(> ?temperatura 15)&:(< ?temperatura 30))
+		(temperatura ?temperatura &:(> ?temperatura 14)&:(< ?temperatura 31))
 	)
 	=>
 	(assert (respuesta (print "La planta esta en condiciones térmicas limitantes para su crecimiento")))
@@ -651,7 +651,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(altitud ?altitud &:(> ?altitud 1000)&:(< ?altitud 1400))
+		(altitud ?altitud &:(> ?altitud 999)&:(< ?altitud 1401))
 	)
 	=>
 	(assert (cacaoHumedad))
@@ -682,7 +682,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(humedadRelativa ?humedadRelativa &:(> ?humedadRelativa 80)&:(< ?humedadRelativa 90))
+		(humedadRelativa ?humedadRelativa &:(> ?humedadRelativa 79)&:(< ?humedadRelativa 91))
 	)
 	=>
 	(assert (cacaoPh))
@@ -701,7 +701,7 @@
 	(cacaoPh)
 	(planta
 		(nombre 'cacao')
-		(phDelSuelo ?phDelSuelo &:(> ?phDelSuelo 6.5)&:(< ?phDelSuelo 7.5))
+		(phDelSuelo ?phDelSuelo &:(> ?phDelSuelo 6.4)&:(< ?phDelSuelo 7.6))
 	)
 	=>
 	(assert (cacaoFotoperiodo))
