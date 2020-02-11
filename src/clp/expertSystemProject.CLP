@@ -159,7 +159,7 @@
 ;---------------------------------------------------------------
 ;---------------------------REGLAS------------------------------
 ;---------------------------------------------------------------
-;Reglas café
+;Reglas cafï¿½
 (defrule cafePrecipitacion
 	?hecho <- (cafePrecipitacion)
 	(planta
@@ -170,7 +170,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(precipitacion ?precipitacion &:(> ?precipitacion 1499)&:(< ?precipitacion 2001))
+		(precipitacion ?precipitacion &:(> ?precipitacion 1499))
 	)
 	=>
 	(assert (cafeTemperatura))
@@ -186,7 +186,7 @@
 	)
 	(zona
 		(nombre ?nombre)
-		(precipitacion ?precipitacion &:(< ?precipitacion 1500)|:(> ?precipitacion 2000))
+		(precipitacion ?precipitacion &:(< ?precipitacion 1500))
 	)
 	=>
 	(assert (cafePrecipitacionN1))
@@ -205,7 +205,7 @@
 		(precipitacion ?precipitacion &:(> ?precipitacion 1000))
 	)
 	=>
-	(assert (respuesta (print "Se encuentra en una precipitación poco adecuada pero tolerable, lo ideal es tener una precipitación por lo menos de 1500")))
+	(assert (respuesta (print "Se encuentra en una precipitaciï¿½n poco adecuada pero tolerable, lo ideal es tener una precipitaciï¿½n por lo menos de 1500")))
 )
 (defrule cafePrecipitacionN2
 	(cafePrecipitacionN2)
@@ -220,7 +220,7 @@
 		(precipitacion ?precipitacion &:(< ?precipitacion 1000))
 	)
 	=>
-	(assert (respuesta (print "No se encuentra en una precipitación adecuada que puede resultar adversa para su producción y desarrollo")))
+	(assert (respuesta (print "No se encuentra en una precipitaciï¿½n adecuada que puede resultar adversa para su producciï¿½n y desarrollo")))
 )
 (defrule cafeTemperatura
 	(cafeTemperatura)
@@ -276,7 +276,7 @@
 		(temperatura ?temperatura &:(> ?temperatura 12)&:(< ?temperatura 28))
 	)
 	=>
-	(assert (respuesta (print "La planta no tiene las condiciones optimas para su producción en cuanto temperatura, debería estar entre los 16 y 22 grados centigrados")))
+	(assert (respuesta (print "La planta no tiene las condiciones optimas para su producciï¿½n en cuanto temperatura, deberï¿½a estar entre los 16 y 22 grados centigrados")))
 )
 (defrule cafeTemperaturaN2
 	(cafeTemperaturaN2)
@@ -291,7 +291,7 @@
 		(temperatura ?temperatura &:(< ?temperatura 13)|:(> ?temperatura 27))
 	)
 	=>
-	(assert (respuesta (print "La planta esta en riesgo de sufrir daños respecto a la temperatura")))
+	(assert (respuesta (print "La planta esta en riesgo de sufrir daï¿½os respecto a la temperatura")))
 )
 (defrule cafeProfundidad
 	(cafeProfundidad)
@@ -316,7 +316,7 @@
 		(altitud ?altitud &:(< ?altitud 1200)|:(> ?altitud 1700))
 	)
 	=>
-	(assert (respuesta (print "La  altitud del terreno no es la optima para su producción, debería estar entre los 1200 y 1700 m")))
+	(assert (respuesta (print "La  altitud del terreno no es la optima para su producciï¿½n, deberï¿½a estar entre los 1200 y 1700 m")))
 )
 (defrule cafeAltitud
 	(cafeAltitud)
@@ -372,7 +372,7 @@
 		(phDelSuelo ?phDelSuelo &:(< ?phDelSuelo 5)|:(> ?phDelSuelo 5.5))
 	)
 	=>
-	(assert (respuesta (print "El PH del suelo no es optimo, se dificulta la nutrición del cultivo, debe estar entre 5 y 5.5")))
+	(assert (respuesta (print "El PH del suelo no es optimo, se dificulta la nutriciï¿½n del cultivo, debe estar entre 5 y 5.5")))
 )
 (defrule cafePh
 	(cafePh)
@@ -392,7 +392,7 @@
 		(fotoperiodo 'diaNeutro')
 	)
 	=>
-	(assert (respuesta (print "EL proceso de floración pordria verse afectado, hay que disminuir la cantidad de horas al sol")))
+	(assert (respuesta (print "EL proceso de floraciï¿½n pordria verse afectado, hay que disminuir la cantidad de horas al sol")))
 )
 (defrule cafeFotoperiodoN2
 	(cafeFotoperiodoN2)
@@ -401,7 +401,7 @@
 		(fotoperiodo 'diaLargo')
 	)
 	=>
-	(assert (respuesta (print "EL proceso de floración pordria verse afectado, hay que disminuir la cantidad de horas al sol")))
+	(assert (respuesta (print "EL proceso de floraciï¿½n pordria verse afectado, hay que disminuir la cantidad de horas al sol")))
 )
 (defrule cafeFotoperiodo
 	(cafeFotoperiodo)
@@ -424,7 +424,7 @@
 		(texturaDelSuelo 'ligera')
 	)
 	=>
-	(assert (respuesta (print "El café necesita de texturas mas pesadas para su producción optima")))
+	(assert (respuesta (print "El cafï¿½ necesita de texturas mas pesadas para su producciï¿½n optima")))
 )
 (defrule cafeTextura2N
 	(cafeTextura2N)
@@ -433,7 +433,7 @@
 		(texturaDelSuelo 'moderadamenteLigera')
 	)
 	=>
-	(assert (respuesta (print "El café necesita de texturas mas pesadas para su producción optima")))
+	(assert (respuesta (print "El cafï¿½ necesita de texturas mas pesadas para su producciï¿½n optima")))
 )
 (defrule cafeTextura1
 	(cafeTextura1)
@@ -523,7 +523,7 @@
 		(precipitacion ?precipitacion &:(> ?precipitacion 1500))
 	)
 	=>
-	(assert (respuesta (print "La precipitación es mayor a la optima, puede que haya riesgo a problemas de fungosis")))
+	(assert (respuesta (print "La precipitaciï¿½n es mayor a la optima, puede que haya riesgo a problemas de fungosis")))
 )
 (defrule cacaoPrecipitacionN2
 	(cacaoPrecipitacionN2)
@@ -538,7 +538,7 @@
 		(precipitacion ?precipitacion &:(< ?precipitacion 1500))
 	)
 	=>
-	(assert (respuesta (print "La precipitación es menor a la optima, se requiere riego.")))
+	(assert (respuesta (print "La precipitaciï¿½n es menor a la optima, se requiere riego.")))
 )
 (defrule cacaoTemperatura
 	(cacaoTemperatura)
@@ -563,7 +563,7 @@
 		(profundidadDelSuelo ?pr &:(< ?pr 1))
 	)
 	=>
-	(assert (respuesta (print "No se encuentra en la profundidad de suelo optima para el crecimiento de sus raíces, debe ser mayor a un metro")))
+	(assert (respuesta (print "No se encuentra en la profundidad de suelo optima para el crecimiento de sus raï¿½ces, debe ser mayor a un metro")))
 )
 (defrule cacaoTemperaturaN
 	(cacaoTemperaturaN)
@@ -594,7 +594,7 @@
 		(temperatura ?temperatura &:(> ?temperatura 14)&:(< ?temperatura 31))
 	)
 	=>
-	(assert (respuesta (print "La planta esta en condiciones térmicas limitantes para su crecimiento")))
+	(assert (respuesta (print "La planta esta en condiciones tï¿½rmicas limitantes para su crecimiento")))
 )
 (defrule cacaoTemperaturaN2
 	(cacaoTemperaturaN2)
@@ -690,7 +690,7 @@
 		(phDelSuelo ?phDelSuelo &:(< ?phDelSuelo 6.5)|:(> ?phDelSuelo 7.5))
 	)
 	=>
-	(assert (respuesta (print "El PH del suelo no es el más optimo. Debe estar entre 6.5 y 7.5")))
+	(assert (respuesta (print "El PH del suelo no es el mï¿½s optimo. Debe estar entre 6.5 y 7.5")))
 )
 (defrule cacaoPh
 	(cacaoPh)
@@ -742,7 +742,7 @@
 		(texturaDelSuelo 'ligera')
 	)
 	=>
-	(assert (respuesta (print "El cacao necesita de texturas mas pesadas para su producción optima")))
+	(assert (respuesta (print "El cacao necesita de texturas mas pesadas para su producciï¿½n optima")))
 )
 (defrule cacaoTextura2N
 	(cacaoTextura2N)
@@ -751,7 +751,7 @@
 		(texturaDelSuelo 'moderadamenteLigera')
 	)
 	=>
-	(assert (respuesta (print "El cacao necesita de texturas mas pesadas para su producción optima")))
+	(assert (respuesta (print "El cacao necesita de texturas mas pesadas para su producciï¿½n optima")))
 )
 (defrule cacaoTextura1
 	(cacaoTextura1)
