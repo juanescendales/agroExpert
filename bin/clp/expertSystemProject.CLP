@@ -57,6 +57,8 @@
 (deffacts hechos_iniciales
 	(cafePrecipitacion)
 	(cafePrecipitacionN)
+	(cacaoPrecipitacion)
+	(cacaoPrecipitacionN)
 	(zona
 		(nombre 'Palestina')
 		(altitud 1603)
@@ -144,7 +146,14 @@
 		(humedadRelativa 77)
 
 	)
+	(zona
+		(nombre 'cacao')
+		(altitud 1200)
+		(temperatura 25)
+		(precipitacion 1600)
+		(humedadRelativa 85)
 
+	)
 )
 
 ;---------------------------------------------------------------
@@ -454,6 +463,323 @@
 	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
 )
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;Reglas cacao
+(defrule cacaoPrecipitacion
+	?hecho <- (cacaoPrecipitacion)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(precipitacion ?precipitacion &:(> ?precipitacion 1500)&:(< ?precipitacion 2400))
+	)
+	=>
+	(assert (cacaoTemperatura))
+	(assert (cacaoTemperaturaN))
+)
+(defrule cacaoPrecipitacionN
+	?hecho <- (cacaoPrecipitacionN)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(precipitacion ?precipitacion &:(< ?precipitacion 1500)|:(> ?precipitacion 2400))
+	)
+	=>
+	(assert (cacaoPrecipitacionN1))
+	(assert (cacaoPrecipitacionN2))
+)
+(defrule cacaoPrecipitacionN1
+	(cacaoPrecipitacionN1)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(precipitacion ?precipitacion &:(> ?precipitacion 1500))
+	)
+	=>
+	(assert (respuesta (print "La precipitación es mayor a la optima, puede que haya riesgo a problemas de fungosis")))
+)
+(defrule cacaoPrecipitacionN2
+	(cacaoPrecipitacionN2)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(precipitacion ?precipitacion &:(< ?precipitacion 1500))
+	)
+	=>
+	(assert (respuesta (print "La precipitación es menor a la optima, se requiere riego.")))
+)
+(defrule cacaoTemperatura
+	(cacaoTemperatura)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(temperatura ?temperatura &:(> ?temperatura 23)&:(< ?temperatura 28))
+	)
+	=>
+	(assert (cacaoProfundidad))
+	(assert (cacaoProfundidadN))
+)
+(defrule cacaoProfundidadN
+	(cacaoProfundidadN)
+	(planta
+		(nombre 'cacao')
+		(profundidadDelSuelo ?pr &:(< ?pr 1))
+	)
+	=>
+	(assert (respuesta (print "No se encuentra en la profundidad de suelo optima para el crecimiento de sus raíces, debe ser mayor a un metro")))
+)
+(defrule cacaoTemperaturaN
+	(cacaoTemperaturaN)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(temperatura ?temperatura &:(< ?temperatura 23)|:(> ?temperatura 28))
+	)
+	=>
+	(assert (cacaoTemperaturaN1))
+	(assert (cacaoTemperaturaN2))
+)
+(defrule cacaoTemperaturaN1
+	(cacaoTemperaturaN1)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(temperatura ?temperatura &:(> ?temperatura 15)&:(< ?temperatura 30))
+	)
+	=>
+	(assert (respuesta (print "La planta esta en condiciones térmicas limitantes para su crecimiento")))
+)
+(defrule cacaoTemperaturaN2
+	(cacaoTemperaturaN2)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(temperatura ?temperatura &:(< ?temperatura 15)|:(> ?temperatura 30))
+	)
+	=>
+	(assert (respuesta (print "La planta esta en condiciones de temperatura muy desfavorables")))
+)
+(defrule cacaoProfundidad
+	(cacaoProfundidad)
+	(planta
+		(nombre 'cacao')
+		(profundidadDelSuelo ?pr &:(> ?pr 1))
+	)
+	=>
+	(assert (cacaoAltitud))
+	(assert (cacaoAltitudN))
+)
+(defrule cacaoAltitudN
+	(cacaoAltitudN)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(altitud ?altitud &:(< ?altitud 1000)|:(> ?altitud 1400))
+	)
+	=>
+	(assert (respuesta (print "La  altitud del terreno no es la optima para su produccion")))
+)
+(defrule cacaoAltitud
+	(cacaoAltitud)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(altitud ?altitud &:(> ?altitud 1000)&:(< ?altitud 1400))
+	)
+	=>
+	(assert (cacaoHumedad))
+	(assert (cacaoHumedadN))
+)
+(defrule cacaoHumedadN
+	(cacaoHumedadN)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(humedadRelativa ?humedadRelativa &:(< ?humedadRelativa 80)|:(> ?humedadRelativa 90))
+	)
+	=>
+	(assert (respuesta (print "La humedad relativa no es la optima")))
+)
+(defrule cacaoHumedad
+	(cacaoHumedad)
+	(planta
+		(nombre 'cacao')
+	)
+	(zonaSeleccionada
+		(nombre ?nombre)
+	)
+	(zona
+		(nombre ?nombre)
+		(humedadRelativa ?humedadRelativa &:(> ?humedadRelativa 80)&:(< ?humedadRelativa 90))
+	)
+	=>
+	(assert (cacaoPh))
+	(assert (cacaoPhN))
+)
+(defrule cacaoPhN
+	(cacaoPhN)
+	(planta
+		(nombre 'cacao')
+		(phDelSuelo ?phDelSuelo &:(< ?phDelSuelo 6.5)|:(> ?phDelSuelo 7.5))
+	)
+	=>
+	(assert (respuesta (print "El PH del suelo no es el más optimo. Debe estar entre 6.5 y 7.5")))
+)
+(defrule cacaoPh
+	(cacaoPh)
+	(planta
+		(nombre 'cacao')
+		(phDelSuelo ?phDelSuelo &:(> ?phDelSuelo 6.5)&:(< ?phDelSuelo 7.5))
+	)
+	=>
+	(assert (cacaoFotoperiodo))
+	(assert (cacaoFotoperiodoN1))
+	(assert (cacaoFotoperiodoN2))
+)
+(defrule cacaoFotoperiodoN1
+	(cacaoFotoperiodoN1)
+	(planta
+		(nombre 'cacao')
+		(fotoperiodo 'diaCorto')
+	)
+	=>
+	(assert (respuesta (print "El foto periodo optimo esta entre las 12 y 14 horas de sol al dia")))
+)
+(defrule cacaoFotoperiodoN2
+	(cacaoFotoperiodoN2)
+	(planta
+		(nombre 'cacao')
+		(fotoperiodo 'diaLargo')
+	)
+	=>
+	(assert (respuesta (print "El foto periodo optimo esta entre las 12 y 14 horas de sol al dia")))
+)
+(defrule cacaoFotoperiodo
+	(cacaoFotoperiodo)
+	(planta
+		(nombre 'cacao')
+		(fotoperiodo 'diaNeutro')
+	)
+	=>
+	(assert (cacaoTextura1))
+	(assert (cacaoTextura2))
+	(assert (cacaoTextura3))
+	(assert (cacaoTextura1N))
+	(assert (cacaoTextura2N))
+	(assert (cacaoTextura3N))
+)
+(defrule cacaoTextura1N
+	(cacaoTextura1N)
+	(planta
+		(nombre 'cacao')
+		(texturaDelSuelo 'ligera')
+	)
+	=>
+	(assert (respuesta (print "El cacao necesita de texturas mas pesadas para su producción optima")))
+)
+(defrule cacaoTextura2N
+	(cacaoTextura2N)
+	(planta
+		(nombre 'cacao')
+		(texturaDelSuelo 'moderadamenteLigera')
+	)
+	=>
+	(assert (respuesta (print "El cacao necesita de texturas mas pesadas para su producción optima")))
+)
+(defrule cacaoTextura1
+	(cacaoTextura1)
+	(planta
+		(nombre 'cacao')
+		(texturaDelSuelo 'media')
+	)
+	=>
+	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
+)
+(defrule cacaoTextura2
+	(cacaoTextura2)
+	(planta
+		(nombre 'cacao')
+		(texturaDelSuelo 'moderadamentePesada')
+	)
+	=>
+	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
+)
+(defrule cacaoTextura3
+	(cacaoTextura3)
+	(planta
+		(nombre 'cacao')
+		(texturaDelSuelo 'pesada')
+	)
+	=>
+	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
+)
 
 
 
