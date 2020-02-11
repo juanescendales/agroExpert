@@ -425,7 +425,6 @@
 	)
 	=>
 	(assert (respuesta (print "El café necesita de texturas mas pesadas para su producción optima")))
-	(reset)
 )
 (defrule cafeTextura2N
 	(cafeTextura2N)
@@ -435,7 +434,6 @@
 	)
 	=>
 	(assert (respuesta (print "El café necesita de texturas mas pesadas para su producción optima")))
-	(reset)
 )
 (defrule cafeTextura1
 	(cafeTextura1)
@@ -445,7 +443,6 @@
 	)
 	=>
 	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
-	(reset)
 )
 (defrule cafeTextura2
 	(cafeTextura2)
@@ -455,7 +452,6 @@
 	)
 	=>
 	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
-	(reset)
 )
 (defrule cafeTextura3
 	(cafeTextura3)
@@ -465,7 +461,6 @@
 	)
 	=>
 	(assert (respuesta (print "La planta presenta, en estas condiciones, un estado optimo")))
-	(reset)
 )
 
 
