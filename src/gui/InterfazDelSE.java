@@ -28,6 +28,8 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 
@@ -39,19 +41,31 @@ public class InterfazDelSE extends JFrame {
 	private JTextField TFotoperiodo;
 	private JTextField TProfundidad;
 	
-	
 
 	public InterfazDelSE(String textura,ConsolePanel c,Rete motor) throws JessException {
-		
-        
 		
 		// Asignar nombre a la ventana
 		super("AgroExpert");
 		
+		class validator {
+			public boolean validarCampo(String text){
+				try {
+					if(text.length()>0) {
+						if(!text.substring(text.length()-1).equals(".")) {
+							int n=Integer.parseInt(text.substring(text.length()-1));
+						}
+					}
+					return true;
+				}catch(Exception e) {
+					return false;
+				}
+		    }  
+        };
+		
 		
 		// Asignar aspectos basicos de la ventana
 		this.setMinimumSize(new Dimension(250, 350));
-		this.setSize(824, 676);
+		this.setSize(470, 718);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -88,92 +102,119 @@ public class InterfazDelSE extends JFrame {
 		ayuda.add(info);
 		getContentPane().setLayout(null);
 		
-		JLabel Titulo = new JLabel("REQUERIMIENTOS AGROECOL\u00D3GICOS DEL CULTIVO");
+		JLabel Titulo = new JLabel("REQUERIMIENTOS ");
 		Titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		Titulo.setFont(new Font("Tahoma", Font.BOLD, 27));
-		Titulo.setBounds(27, 13, 749, 40);
+		Titulo.setFont(new Font("Tahoma", Font.BOLD, 22));
+		Titulo.setBounds(0, 13, 452, 47);
 		getContentPane().add(Titulo);
 		
 		JLabel LTS = new JLabel("Textura del suelo: ");
 		LTS.setFont(new Font("Tahoma", Font.BOLD, 15));
-		LTS.setBounds(27, 84, 151, 16);
+		LTS.setBounds(27, 135, 151, 16);
 		getContentPane().add(LTS);
 		
 		JLabel LPh = new JLabel("Ph del suelo: ");
 		LPh.setFont(new Font("Tahoma", Font.BOLD, 15));
-		LPh.setBounds(27, 132, 151, 16);
+		LPh.setBounds(27, 183, 151, 16);
 		getContentPane().add(LPh);
 		
 		JLabel LFP = new JLabel("Fotoperiodo: ");
 		LFP.setFont(new Font("Tahoma", Font.BOLD, 15));
-		LFP.setBounds(27, 177, 151, 16);
+		LFP.setBounds(27, 228, 151, 16);
 		getContentPane().add(LFP);
 		
 		TTextura = new JTextField(textura);
 		TTextura.setHorizontalAlignment(SwingConstants.CENTER);
 		TTextura.setBackground(UIManager.getColor("Button.background"));
-		TTextura.setBounds(242, 82, 116, 22);
+		TTextura.setBounds(242, 133, 116, 22);
+		TTextura.setEditable(false);
 		getContentPane().add(TTextura);
 		TTextura.setColumns(10);
 		
 		TPh = new JTextField();
+		TPh.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				validator validador = new validator();
+				String texto=TPh.getText();
+				if(validador.validarCampo(texto)==false) {
+					TPh.setText(texto.substring(0,texto.length()-1));
+				}
+			}
+		});
 		TPh.setHorizontalAlignment(SwingConstants.CENTER);
-		TPh.setBounds(242, 130, 116, 22);
+		TPh.setBounds(242, 181, 116, 22);
 		getContentPane().add(TPh);
 		TPh.setColumns(10);
 		
 		TFotoperiodo = new JTextField();
+		TFotoperiodo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				validator validador = new validator();
+				String texto=TFotoperiodo.getText();
+				if(validador.validarCampo(texto)==false) {
+					TFotoperiodo.setText(texto.substring(0,texto.length()-1));
+				}
+			}
+		});
 		TFotoperiodo.setHorizontalAlignment(SwingConstants.CENTER);
-		TFotoperiodo.setBounds(242, 175, 116, 22);
+		TFotoperiodo.setBounds(242, 226, 116, 22);
 		getContentPane().add(TFotoperiodo);
 		TFotoperiodo.setColumns(10);
 		
 		JLabel lblNewLabel_5 = new JLabel("Ph");
-		lblNewLabel_5.setBounds(370, 133, 56, 16);
+		lblNewLabel_5.setBounds(370, 183, 56, 16);
 		getContentPane().add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("horas");
-		lblNewLabel_6.setBounds(370, 178, 56, 16);
+		lblNewLabel_6.setBounds(370, 228, 56, 16);
 		getContentPane().add(lblNewLabel_6);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(438, 82, 333, 219);
-		getContentPane().add(textArea);
 	
 		
 		JLabel lblZona = new JLabel("Zona: ");
 		lblZona.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblZona.setBounds(27, 270, 151, 16);
+		lblZona.setBounds(27, 321, 151, 16);
 		getContentPane().add(lblZona);
 		
 		JComboBox cbZona = new JComboBox();
 		cbZona.setModel(new DefaultComboBoxModel(new String[] {"Palestina", "Armenia", "Yopal", "Medellin", "Popayan", "Villavicencio", "Palmira", "Pasto", "Florencia", "Aguazul","cafe"}));
-		cbZona.setBounds(242, 268, 116, 22);
+		cbZona.setBounds(242, 319, 116, 22);
 		getContentPane().add(cbZona);
 		
 		JLabel lblPlanta = new JLabel("Planta: ");
 		lblPlanta.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPlanta.setBounds(27, 314, 151, 16);
+		lblPlanta.setBounds(27, 365, 151, 16);
 		getContentPane().add(lblPlanta);
 		
 		JComboBox cbPlanta = new JComboBox();
 		cbPlanta.setModel(new DefaultComboBoxModel(new String[] {"cafe", "cacao"}));
-		cbPlanta.setBounds(242, 312, 116, 22);
+		cbPlanta.setBounds(242, 363, 116, 22);
 		getContentPane().add(cbPlanta);
 		
 		JLabel lblProfundidadDelSuelo = new JLabel("Profundidad del suelo: ");
 		lblProfundidadDelSuelo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblProfundidadDelSuelo.setBounds(27, 224, 203, 16);
+		lblProfundidadDelSuelo.setBounds(27, 275, 203, 16);
 		getContentPane().add(lblProfundidadDelSuelo);
 		
 		TProfundidad = new JTextField();
+		TProfundidad.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				validator validador = new validator();
+				String texto=TProfundidad.getText();
+				if(validador.validarCampo(texto)==false) {
+					TProfundidad.setText(texto.substring(0,texto.length()-1));
+				}
+			}
+		});
 		TProfundidad.setHorizontalAlignment(SwingConstants.CENTER);
 		TProfundidad.setColumns(10);
-		TProfundidad.setBounds(242, 222, 116, 22);
+		TProfundidad.setBounds(242, 273, 116, 22);
 		getContentPane().add(TProfundidad);
 		
 		JLabel lblMetros = new JLabel("metros");
-		lblMetros.setBounds(370, 225, 56, 16);
+		lblMetros.setBounds(370, 275, 56, 16);
 		getContentPane().add(lblMetros);
 		
 		JButton sendButton = new JButton("Obtener recomendacion");
@@ -186,18 +227,22 @@ public class InterfazDelSE extends JFrame {
 	    		TPh,
 	    		TFotoperiodo,
 	    		TProfundidad,
-	    		textArea,
 	    		motor));
-
-		sendButton.setBounds(318, 362, 178, 29);
+		sendButton.setBounds(126, 422, 178, 29);
 		getContentPane().add(sendButton);
 		
 		JPanel consolePanel = new JPanel();
 		consolePanel.setLayout(new BorderLayout());
-		consolePanel.setBounds(12, 413, 786, 168);
+		consolePanel.setBounds(12, 464, 426, 168);
 		consolePanel.add(console, BorderLayout.CENTER);
 		consolePanel.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
 		getContentPane().add(consolePanel);
+		
+		JLabel lblAgroecolgicosdelCultivo = new JLabel("AGROECOL\u00D3GICOS DEL CULTIVO");
+		lblAgroecolgicosdelCultivo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAgroecolgicosdelCultivo.setFont(new Font("Tahoma", Font.BOLD, 22));
+		lblAgroecolgicosdelCultivo.setBounds(0, 56, 452, 47);
+		getContentPane().add(lblAgroecolgicosdelCultivo);
 		
 		
 		
