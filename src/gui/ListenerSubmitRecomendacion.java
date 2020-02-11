@@ -81,7 +81,12 @@ public class ListenerSubmitRecomendacion implements ActionListener {
 							text+=faux.getSlotValue("print");
 						}
 					}
-					JOptionPane.showMessageDialog(null,text.substring(1,text.length()-1),"Resultado", 1);
+					if(text.length()>0) {
+						JOptionPane.showMessageDialog(null,text.substring(1,text.length()-1),"Resultado", 1);
+					}else {
+						JOptionPane.showMessageDialog(null,"Ups, algo salio mal...","Resultado", 0);
+					}
+					
             	} catch (JessException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

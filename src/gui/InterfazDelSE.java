@@ -26,8 +26,6 @@ import jess.Rete;
 import javax.swing.JComboBox;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
