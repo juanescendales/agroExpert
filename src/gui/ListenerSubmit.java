@@ -46,7 +46,9 @@ public class ListenerSubmit implements ActionListener {
                 JFuzzyChart.get().chart(texturaSuelo.getFunctionBlock("texturaSuelo"));
 
                 // Show output variable
+                
                 double resultado = texturaSuelo.getVariable("textura").defuzzify();
+                System.out.println(resultado);
                 String resultadoString = "";
                 if(resultado <= 20) {
                 	resultadoString = "ligera";
